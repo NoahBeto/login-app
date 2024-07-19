@@ -20,7 +20,11 @@ let users = [
 // API handler for registering new users
 const registerUser = (username, password) => {
   const encryptedPassword = encryptPassword(password);
-  const newUser = { id: users.length + 1, username, password: encryptedPassword };
+  const newUser = {
+    id: users.length + 1,
+    username,
+    password: encryptedPassword,
+  };
   users.push(newUser);
   return newUser;
 };
@@ -28,12 +32,15 @@ const registerUser = (username, password) => {
 // API handler for login
 export default function handler(req, res) {
   if (req.method === 'POST') {
-    const { username, password } = req.body;
+    const { username, password: encrypted_password_input } = req.body;
 
-    console.log('Received login request:', { username, password });
+    console.log('Received login request:', {
+      username,
+      password: encrypted_password_input,
+    });
 
     // Find user by username
-    const user = users.find(u => u.username === username);
+    const user = users.find((u) => u.username === username);
 
     if (!user) {
       console.log('User not found');
@@ -42,10 +49,11 @@ export default function handler(req, res) {
 
     // Decrypt stored password and compare
     const decryptedPassword = decryptPassword(user.password);
+    const decrypted_password_input = decryptPassword(encrypted_password_input);
 
     console.log('Decrypted password:', decryptedPassword);
 
-    if (password !== decryptedPassword) {
+    if (decrypted_password_input !== decryptedPassword) {
       console.log('Invalid credentials');
       return res.status(401).json({ message: 'Invalid credentials' });
     }
@@ -59,7 +67,7 @@ export default function handler(req, res) {
     const { username, password } = req.body;
 
     // Check if username already exists
-    const existingUser = users.find(u => u.username === username);
+    const existingUser = users.find((u) => u.username === username);
     if (existingUser) {
       return res.status(400).json({ message: 'Username already exists' });
     }
@@ -67,7 +75,9 @@ export default function handler(req, res) {
     // Register new user
     const newUser = registerUser(username, password);
 
-    return res.status(201).json({ message: 'User registered successfully', user: newUser });
+    return res
+      .status(201)
+      .json({ message: 'User registered successfully', user: newUser });
   } else {
     // Handle other HTTP methods
     console.log('Method Not Allowed');
