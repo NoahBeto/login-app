@@ -44,6 +44,35 @@ const LoginForm = () => {
     setPassword('');
   };
 
+  const handleRegister = async () => {
+    try {
+      const response = await fetch('/api/login', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
+      });
+
+      if (response.ok) {
+        const responseData = await response.json();
+        setSuccessMessage(responseData.message); // Set success message
+        setError(''); // Clear any previous error message
+      } else {
+        const errorData = await response.json();
+        setError(errorData.message);
+        setSuccessMessage(''); // Clear success message
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      setError('An unexpected error occurred. Please try again.');
+      setSuccessMessage(''); // Clear success message
+    }
+
+    // Clear password after registration attempt
+    setPassword('');
+  };
+
   // Function to encrypt password
   const encryptPassword = (password) => {
     return CryptoJS.AES.encrypt(password, 'secret_key').toString();
@@ -82,6 +111,14 @@ const LoginForm = () => {
           Login
         </button>
       </form>
+      <div className="mt-4">
+        <button
+          onClick={handleRegister}
+          className="w-full bg-gray-300 text-gray-800 py-2 px-4 rounded-md hover:bg-gray-400 focus:outline-none focus:bg-gray-400"
+        >
+          Register
+        </button>
+      </div>
     </div>
   );
 };
