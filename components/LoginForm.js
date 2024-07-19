@@ -1,10 +1,10 @@
-import { useState } from 'react';
-import CryptoJS from 'crypto-js';
+import { useState } from "react";
+import CryptoJS from "crypto-js";
 
 const LoginForm = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -13,34 +13,34 @@ const LoginForm = () => {
       // Encrypt password before sending
       const encryptedPassword = encryptPassword(password);
 
-      const response = await fetch('/api/login', {
-        method: 'POST',
+      const response = await fetch("/api/login", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ username, password: encryptedPassword }),
       });
 
       if (response.ok) {
-        console.log('Login successful');
+        console.log("Login successful");
         // Redirect or perform actions after successful login
       } else {
         const errorData = await response.json();
-        console.error('Login failed:', errorData.message);
+        console.error("Login failed:", errorData.message);
         setError(errorData.message);
       }
     } catch (error) {
-      console.error('Error:', error);
-      setError('An unexpected error occurred. Please try again.');
+      console.error("Error:", error);
+      setError("An unexpected error occurred. Please try again.");
     }
 
     // Clear password after logging in
-    setPassword('');
+    setPassword("");
   };
 
   // Function to encrypt password
   const encryptPassword = (password) => {
-    return CryptoJS.AES.encrypt(password, 'secret_key').toString();
+    return CryptoJS.AES.encrypt(password, "secret_key").toString();
   };
 
   return (
@@ -49,7 +49,9 @@ const LoginForm = () => {
       {error && <p className="text-red-500 mb-4">{error}</p>}
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700">Username</label>
+          <label className="block text-sm font-medium text-gray-700">
+            Username
+          </label>
           <input
             type="text"
             value={username}
@@ -59,7 +61,9 @@ const LoginForm = () => {
           />
         </div>
         <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700">Password</label>
+          <label className="block text-sm font-medium text-gray-700">
+            Password
+          </label>
           <input
             type="password"
             value={password}
