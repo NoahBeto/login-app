@@ -1,34 +1,48 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Login App
 
-## Getting Started
+This is a full stack login application built with Next.js and related technologies. It was developed as part of my internship at Bay Valley Tech where I worked on UI components and integration for the next-component-library project. This app includes both frontend UI and backend authentication logic.
 
-First, run the development server:
+You can see the full component library project here: https://github.com/Operating-Owls/next-component-library
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+## Project Files
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. components  
+   Contains reusable UI components for the login interface.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+2. pages  
+   Contains the pages for the app, including login, signup, and API routes.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+3. public  
+   Static assets used by the application.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+4. styles  
+   CSS files and styling for the app.
 
-## Learn More
+5. next.config.js and other config files  
+   Configuration for the Next.js project and build setup.:contentReference[oaicite:1]{index=1}
 
-To learn more about Next.js, take a look at the following resources:
+## How to Run the Project
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Download or clone the repository.  
+2. Install dependencies with npm or yarn.  
+   ```bash
+   npm install
+   ```
+3. Create a .env.local file with any required environment variables for authentication or database connections.  
+4. Start the development server.
+   ```bash
+   npm run dev
+   ```
+5. Open a browser and go to http://localhost:3000
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## What This Project Includes
 
-## Deploy on Vercel
+1. Login related UI components  
+2. Backend logic for authentication  
+3. API routes for handling user data  
+4. Responsive styling and layout  
+5. Use of Next.js for full stack development
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Purpose
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+This project was built during my internship at Bay Valley Tech. It represents part of my contribution to a larger shared component library and demonstrates full stack development with both UI and backend logic.
